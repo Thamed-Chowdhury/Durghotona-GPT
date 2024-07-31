@@ -1,7 +1,7 @@
 # Web Scraping and Large Language Models (LLM) Based Automated Accident Dataset Generation
 This is a web scraping and LLM based application that can collect and process accident news automatically and generates an excel file.
 ## Introduction
-Welcome to this github repo. This project aims to generate accident dataset fully automatically. First, the program visits a newspaper website the user has specified. Then it collects accident news automatically using selenium. Then the collected news is processed through an LLM specified by the user to generate accident dataset. Currently, this application can scrape news from 3 websites in Bangladesh: 'The Prothom Alo', 'The Daily Star' and 'Dhaka Tribune'. The user has a choice of using any of the 3 LLMS: GPT-4, GPT-3.5 and Llama3. This dataset will be useful for building Machine Learning models and policy decision making.
+Welcome to this github repo. This project aims to generate accident dataset fully automatically. First, the program visits a newspaper website the user has specified. Then it collects accident news automatically using selenium. Then the collected news is processed through an LLM specified by the user to generate accident dataset. Currently, this application can scrape news from 3 websites in Bangladesh: **'The Prothom Alo', 'The Daily Star' and 'Dhaka Tribune'**. The user has a choice of using any of the 3 LLMs: **GPT-4, GPT-3.5 and Llama3**. This dataset will be useful for building Machine Learning models and policy decision making.
 This project was built as part of a thesis work by the author.
 ## How to use?
 There are two ways to use this program:
@@ -14,7 +14,7 @@ The authors built this work as a streamlit application and hosted it on huggingf
 
 Steps:
 
-1) Go to this link:
+1) Go to this link. **If you face any loading issue, connect a VPN and try again**:
    (https://huggingface.co/spaces/Thamed-Chowdhury/Automated_Accident_Dataset)
 2) You will be seeing an interface like this.
    ![image](https://github.com/user-attachments/assets/60865c55-988d-442f-bbe9-8c43b7b01404)

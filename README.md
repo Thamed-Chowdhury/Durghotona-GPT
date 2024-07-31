@@ -13,15 +13,18 @@ The authors built this work as a streamlit application and hosted it on huggingf
 Steps:
 1) Go to this link:
    (https://huggingface.co/spaces/Thamed-Chowdhury/Automated_Accident_Dataset)
-3) You will be seeing an interface like this.
+2) You will be seeing an interface like this.
    !![image](https://github.com/user-attachments/assets/60865c55-988d-442f-bbe9-8c43b7b01404)
 
-5) Choose a newspaper you want to collect news from.
-6) Choose an LLM you want to process the news with.
-7) You have to wait some minutes depending on your input as it takes some time.
-8) You will be seeing the generated dataset once the process is finished and download it as a CSV file.
+3) Choose a newspaper you want to collect news from.
+4) Choose an LLM you want to process the news with.
+5) Click 'Generate Dataset' button
+6) You have to wait some minutes depending on your input as it takes some time.
+7) You will be seeing the generated dataset once the process is finished and download it as a CSV file.
+   ![image](https://github.com/user-attachments/assets/ee4d6921-1af6-40cf-81af-a1f8a0552ae1)
 
-Disclaimer: Since this is only a demo for this work, it has some limitations. It does not provide the users the option to collect news from "Dhaka Tribune" newspaper. Also, since there are cost involved in using the LLMs, maximum 50 news reports can be processed. If you want to avoid these limitations, follow the 2nd method.
+
+**Disclaimer**: Since this is only a demo for this work, it has some limitations. It does not provide the users the option to collect news from "Dhaka Tribune" newspaper. Also, since there are cost involved in using the LLMs, maximum 50 news reports can be processed. If you want to avoid these limitations, follow the 2nd method.
 
 ### Using this locally in user's PC
 This method is for those who want to run the application in their own pc and avoid the limitations of 1st method. The steps are given below. Note that we are using anaconda for this purpose:

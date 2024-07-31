@@ -30,13 +30,27 @@ Steps:
 This method is for those who want to run the application in their own pc and avoid the limitations of 1st method. The steps are given below. Note that we are using anaconda for this purpose:
 1) Download this repo and unzip it in a folder.
 2) Open Anaconda Prompt and navigate to the folder where the folder is located.
-1) Create a virtual environment using anaconda. The virtual environment must be using python 3.12.3. Here we are giving an example. Note that during this whole process, anaconda might ask for permissions several times. You have to type "y" in these cases and press enter.
-2) Activate the virtual environment in anaconda and install the dependencies stated in requirements.txt file.
-3) Once the installation is completed, type in the anaconda prompt the following command:
+3) Create a virtual environment using anaconda. The virtual environment must be using python 3.12.3. Here we are giving an example. Note that during this whole process, anaconda might ask for permissions several times. You have to type "y" in these cases and press enter. Note that in this example, we are naming our virtual environment `Accident_env` and making sure our python version is 3.12.3. To create a virtual environment run the following command in Anaconda Prompt:
+   ```
+   conda create -n Accident_env python=3.12.3 anaconda
+   ```
+   ![image](https://github.com/user-attachments/assets/18e70cfd-f19c-431f-928d-06c94f4d59cf)
+   
+4) After creating the virtual environment, we must activate the virtual environment in anaconda and install the dependencies stated in requirements.txt file using pip. To activate the virtual environment and install dependencies, run the following commands in Anaconda Prompt:
+   ```
+   conda activate Accident_env
+   pip install -r requirements.txt
+   ```
+   If the installation is successful, a window similar to the image below should appear:
+   ![image](https://github.com/user-attachments/assets/5f502510-2225-4fcc-83a4-737f198f5332)
+
+5) Once the installation is completed, type in the anaconda prompt the following command:
    ```
    streamlit run app.py
    ```
-4) If everything is successful, a browser window will open up containing the web app as shown below.
-5) Now, you are done! You can collect accident data as your heart's content 😉
+6) If everything is successful, a browser window will open up containing the web app as shown below.
+   ![image](https://github.com/user-attachments/assets/41c30210-64a5-4863-8fe9-f8a6cb90e42b)
+
+7) Now, you are done! You can collect accident data as your heart's content 😉
 
 # Please cite our paper if this work helps you in any way. Thanks. 💓

@@ -2,7 +2,7 @@
 This is a web scraping and LLM based application that can collect and process accident news automatically and generates an excel file.
 ## Introduction
 Welcome to this github repo. This project aims to generate accident dataset fully automatically. First, the program visits a newspaper website the user has specified. Then it collects accident news automatically using selenium. Then the collected news is processed through an LLM specified by the user to generate accident dataset. Currently, this application can scrape news from 3 websites in Bangladesh: 'The Prothom Alo', 'The Daily Star' and 'Dhaka Tribune'. The user has a choice of using any of the 3 LLMS: GPT-4, GPT-3.5 and Llama3. This dataset will be useful for building Machine Learning models and policy decision making.
-This project was built as part of a thesis work by the author. So, if you are intersted to know details, you may read this paper. Anyone is welcome to use this work but **please cite this paper if you are benefitted from it.**
+This project was built as part of a thesis work by the author.
 ## How to use?
 There are two ways to use this program:
   1) Using the app as a web application

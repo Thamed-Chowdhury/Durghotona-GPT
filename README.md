@@ -72,4 +72,4 @@ This method is for those who want to run the application in their own pc and avo
 
 8) Now, you are done! You can collect accident data as your heart's content 😉
 
-# Please cite our paper if this work helps you in any way. Thanks. 💓
+

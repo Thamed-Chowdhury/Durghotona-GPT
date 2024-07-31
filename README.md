@@ -17,7 +17,7 @@ Steps:
 1) Go to this link:
    (https://huggingface.co/spaces/Thamed-Chowdhury/Automated_Accident_Dataset)
 2) You will be seeing an interface like this.
-   !![image](https://github.com/user-attachments/assets/60865c55-988d-442f-bbe9-8c43b7b01404)
+   ![image](https://github.com/user-attachments/assets/60865c55-988d-442f-bbe9-8c43b7b01404)
 
 3) Choose a newspaper you want to collect news from.
 4) Choose an LLM you want to process the news with.

@@ -34,13 +34,17 @@ This method is for those who want to run the application in their own pc and avo
 
 1) Download this repo and unzip it in a folder.
 2) To use this app locally in your PC, you will be requiring two API keys: one from OpenAI and another from Groq. You have to make some changes in the files downloaded using these keys. The steps are given below:
+   
    i) Open the "LLM_automation_GPT" python file. In line 17, paste your OpenAI API key inside the quotations as shown below. Then save and close the file:
+   
    ![image](https://github.com/user-attachments/assets/803a8e51-bf2a-4d07-9a66-6d154cb9b496)
 
    ii) Now open the "LLM_automation_GPT35" python file. Go to line 15 and paste your OpenAI API key as shown. Save and close the file.
+   
    ![image](https://github.com/user-attachments/assets/8355a0f1-e049-4179-9b3c-3cddd0ba7364)
 
    iii) Now open the "LLM_automation_Groq" python file. Go to line 17 and paste your Groq API key as shown. Save and close the file.
+   
    ![image](https://github.com/user-attachments/assets/c7d2a5f4-2133-43ec-9977-c7cad1555728)
 
 

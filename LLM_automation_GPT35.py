@@ -12,7 +12,7 @@ def create_data(description):
     load_dotenv()
 
     ### Set all api keys:
-    os.environ["OPENAI_API_KEY"]="sk-proj-ZB9b6Gn2FccVRsaL9WYfT3BlbkFJDpUpcoUwyR9LPoIJuAVl"
+    os.environ["OPENAI_API_KEY"]="ENTER YOUR API HERE"
 
 
     ### Create Prompt Template:

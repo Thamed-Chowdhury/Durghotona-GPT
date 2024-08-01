@@ -14,7 +14,7 @@ def create_data(description):
     ### Set all api keys:
 
     #os.environ["LANGCHAIN_TRACING_V2"]="true" ### Will automatically trace our codes using Langsmith
-    os.environ["GROQ_API_KEY"]="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"  #### Will be used for monitoring the calls to and from llm (both free and paid)
+    os.environ["GROQ_API_KEY"]="ENTER YOUR API HERE"  #### Will be used for monitoring the calls to and from llm (both free and paid)
 
     ### Create Prompt Template:
     prompt=ChatPromptTemplate.from_messages(

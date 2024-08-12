@@ -25,7 +25,8 @@ The authors built this work as a Streamlit application and hosted it on Hugging 
 
 1. Go to this [link](https://huggingface.co/spaces/Thamed-Chowdhury/Automated_Accident_Dataset). **If you face any loading issues, connect to a VPN and try again.**
 2. You will see an interface like this:
-   ![image](https://github.com/user-attachments/assets/60865c55-988d-442f-bbe9-8c43b7b01404)
+   ![image](https://github.com/user-attachments/assets/082b690e-aec0-4db4-8629-0bfdc673f728)
+
 3. Choose a newspaper from which you want to collect news.
 4. Choose an LLM to process the news.
 5. Click the 'Generate Dataset' button.
@@ -67,7 +68,8 @@ conda activate Accident_env
 pip install -r requirements.txt
 ```
 If the installation is successful, a window similar to the image below should appear:
-![image](https://github.com/user-attachments/assets/5f502510-2225-4fcc-83a4-737f198f5332)
+![image](https://github.com/user-attachments/assets/16df1c52-8156-4e1a-b781-dba704f507f8)
+
 
 6. Once the installation is completed, type the following command in Anaconda Prompt:
 ```

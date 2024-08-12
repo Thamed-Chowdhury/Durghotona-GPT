@@ -1,10 +1,10 @@
-# Web Scraping and Large Language Models (LLM) Based Automated Accident Dataset Generation
+# Durghotona GPT
 
-This is a web scraping and LLM-based application that can automatically collect and process accident news to generate an Excel file.
+Durghotona GPT is a web scraping and LLM-based application that can automatically collect and process accident news to generate an Excel file.
 
 ## Introduction
 
-Welcome to this GitHub repository. This project aims to generate an accident dataset fully automatically. The program first visits a newspaper website specified by the user. It then collects accident news automatically using Selenium. The collected news is processed through an LLM specified by the user to generate an accident dataset. Currently, this application can scrape news from three websites in Bangladesh: **Prothom Alo, The Daily Star, and Dhaka Tribune**. The user can choose from three LLMs: **GPT-4, GPT-3.5, and Llama3**. This dataset can be useful for building Machine Learning models and policy decision-making.
+Welcome to Durghotona GPT's GitHub repository. This project aims to generate an accident dataset fully automatically. The program first visits a newspaper website specified by the user. It then collects accident news automatically using Selenium. The collected news is processed through an LLM specified by the user to generate an accident dataset. Currently, this application can scrape news from three websites in Bangladesh: **Prothom Alo, The Daily Star, and Dhaka Tribune**. The user can choose from three LLMs: **GPT-4, GPT-3.5, and Llama3**. This dataset can be useful for building Machine Learning models and policy decision-making.
 
 This project was built as part of the author's thesis work.
 

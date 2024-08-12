@@ -1,1 +1,21 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
 
+cff-version: 1.2.0
+title: Automated Accident Dataset Generator
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: MD Thamed Bin Zaman Chowdhury
+    family-names: Chowdhury
+    name-particle: Thamed
+    email: zamanthamed@gmail.com
+    affiliation: 'Department of Civil Engineering, BUET'
+keywords:
+  - web scraping
+  - large language models
+  - automation
+  - road accident
+  - newspaper analysis

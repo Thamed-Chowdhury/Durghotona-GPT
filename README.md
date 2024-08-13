@@ -68,7 +68,8 @@ conda activate Accident_env
 pip install -r requirements.txt
 ```
 If the installation is successful, a window similar to the image below should appear:
-![image](https://github.com/user-attachments/assets/16df1c52-8156-4e1a-b781-dba704f507f8)
+![image](https://github.com/user-attachments/assets/fab95804-c8fc-4717-bc55-66e8a01ffdeb)
+
 
 
 6. Once the installation is completed, type the following command in Anaconda Prompt:
@@ -76,6 +77,6 @@ If the installation is successful, a window similar to the image below should ap
 streamlit run app.py
 ```
 7. If everything is successful, a browser window will open up containing the web app, as shown below:
-![image](https://github.com/user-attachments/assets/41c30210-64a5-4863-8fe9-f8a6cb90e42b)
+![image](https://github.com/user-attachments/assets/16df1c52-8156-4e1a-b781-dba704f507f8)
 
 8. Now you are done! You can collect accident data to your heart's content 😉

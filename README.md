@@ -4,7 +4,7 @@ Durghotona GPT is a web scraping and LLM-based application that can automaticall
 
 ## Introduction
 
-Welcome to Durghotona GPT's GitHub repository. This project aims to generate an accident dataset fully automatically. The program first visits a newspaper website specified by the user. It then collects accident news automatically using Selenium. The collected news is processed through an LLM specified by the user to generate an accident dataset. Currently, this application can scrape news from three websites in Bangladesh: **Prothom Alo, The Daily Star, and Dhaka Tribune**. The user can choose from three LLMs: **GPT-4, GPT-3.5, and Llama3**. This dataset can be useful for building Machine Learning models and policy decision-making.
+Welcome to Durghotona GPT's GitHub repository. This project aims to generate an accident dataset fully automatically. The program first visits a newspaper website specified by the user. It then collects accident news automatically using Selenium. The collected news is processed through an LLM specified by the user to generate an accident dataset. Currently, this application can scrape news from three websites in Bangladesh: First one is **Prothom Alo**, 2nd one is **The Daily Star**, and the 3rd one is **Dhaka Tribune**. The user can choose from three LLMs: **GPT-4, GPT-3.5, and Llama3**. This dataset can be useful for building Machine Learning models and policy decision-making.
 
 This project was built as part of the author's thesis work.
 
@@ -34,7 +34,7 @@ The authors built this work as a Streamlit application and hosted it on Hugging 
 7. Once the process is finished, you will see the generated dataset and can download it as a CSV file.
    ![image](https://github.com/user-attachments/assets/ee4d6921-1af6-40cf-81af-a1f8a0552ae1)
 
-**Disclaimer:** Since this is only a demo, it has some limitations. It does not allow users to collect news from the "Dhaka Tribune" newspaper. Also, due to the costs involved in using the LLMs, a maximum of 50 news reports can be processed. If you want to avoid these limitations, follow the second method.
+**Disclaimer:** Since this is only a demo, it has some limitations. It does not allow users to collect news from the "Dhaka Tribune" newspaper and does not allow to use GPT-3.5. Also, due to the costs involved in using the LLMs, a maximum of 20 news reports can be processed. **If you want to avoid these limitations, follow the second method**.
 
 ### Using it Locally on the User's PC
 

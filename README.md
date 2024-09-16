@@ -55,7 +55,7 @@ This method is for those who want to run the application on their own PC and avo
    
    ![image](https://github.com/user-attachments/assets/c7d2a5f4-2133-43ec-9977-c7cad1555728)
 
-3. Next, open Anaconda Prompt and navigate to the folder where the folder is located.
+3. Next, open Anaconda Prompt and navigate to the folder where you have kept the downloaded files.
 4. Create a virtual environment using Anaconda. The virtual environment must use Python 3.12.3. Here we are giving an example. Note that during this process, Anaconda might ask for permissions several times. You have to type "y" and press enter in these cases. In this example, we are naming our virtual environment `Accident_env` and ensuring our Python version is 3.12.3. To create a virtual environment, run the following command in Anaconda Prompt:
 ```
 conda create -n Accident_env python=3.12.3 anaconda

@@ -11,7 +11,8 @@ def get_data(number):
     options.add_argument("--disable-extensions");
     options.add_argument("--dns-prefetch-disable");
     options.add_argument("--disable-gpu");
-    options.add_argument("--headless=new")
+    #options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+    #options.add_argument("--headless=new")
     driver = webdriver.Chrome(options=options)
     ## Finding Elements by XPATH
     from selenium.webdriver.common.by import By

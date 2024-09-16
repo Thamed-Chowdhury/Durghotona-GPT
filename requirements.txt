@@ -12,3 +12,4 @@ lxml==5.2.2
 lxml_html_clean==0.1.1
 webdriver-manager==4.0.1
 streamlit-lottie==0.0.5
+deep-translator==1.11.4

@@ -2,7 +2,7 @@ def create_data(description):
     from langchain_core.prompts import ChatPromptTemplate  ### To create a chatbot, chatprompttemplate used
     from langchain_openai import ChatOpenAI ##### For using chat openai features
     from langchain_core.output_parsers import StrOutputParser  ### Default output parser. Custom parser can also be created
-    
+    import time
 
 
     import os
@@ -12,7 +12,7 @@ def create_data(description):
     load_dotenv()
 
     ### Set all api keys:
-    os.environ["OPENAI_API_KEY"]="ENTER YOUR API HERE"
+    os.environ["OPENAI_API_KEY"]="ENTER YOUR OPENAI API KEY HERE"
 
 
     ### Create Prompt Template:
@@ -33,16 +33,9 @@ def create_data(description):
     #### Here we have created three actions: The prompt, llm and output parser:
     chain=prompt|llm|output_parser
 
-    ### A function to invoke the llm. For some reason phi3 doesn't give accurate result sometimes if used directly in dj.append()
-    def res(i):
-        response=chain.invoke({"question" : df2['Description'][i]+" Is the news referring to a specific accident incident or accident in general? Answer only in a word: 'specific' or 'general'. No other words are allowed in your answer"})
-        return response
-
-    #### dj list contains type of report 'General' or 'Specific'
     dj=[]
-
     for i in range(len(df2)):
-        dj.append(res(i))
+        dj.append(chain.invoke({"question" : df2['Description'][i]+" Is the news about road accident? If no, then reply 'General'. Else if the news is about road accident then check if the news is referring to a specific accident incident or accident in general? Answer only in a word: Either specific or general."}))
 
     df2['Report Type']=dj
 
@@ -72,11 +65,14 @@ def create_data(description):
         Date.append(chain.invoke({"question" : "Read the accident report carefully and provide only the answer of the question asked. Do not add any extra sentences or words except the answer: What is the date of accident occurrence in Day-Month-Year format. Keep in mind that news publish date and accident occurrence date may be different. If you cannot find or deduce the answer, simply reply Not Available" + df2['Description'][i]}))
         Time.append(chain.invoke({"question" : "Read the accident report carefully and provide only the answer of the question asked. Do not add any extra sentences or words except the answer: What is the time of accident occurrence in 24-hour format. If you cannot find or deduce the answer, simply reply Not Available" + df2['Description'][i]}))
         Killed.append(chain.invoke({"question" : "Read the accident report carefully and provide only the answer of the question asked. Do not add any extra sentences or words except the answer: How many people were killed in the accident?. If you cannot find or deduce the answer, simply reply Not Available" + df2['Description'][i]}))
+        time.sleep(30)
         Injured.append(chain.invoke({"question" : "Read the accident report carefully and provide only the answer of the question asked. Do not add any extra sentences or words except the answer: How many people were injured in the accident?. If you cannot find or deduce the answer, simply reply Not Available" + df2['Description'][i]}))
         Location.append(chain.invoke({"question" : "Read the accident report carefully and provide only the answer of the question asked. Do not add any extra sentences or words except the answer: What is the name of the location where accident took place?. If you cannot find or deduce the answer, simply reply Not Available" + df2['Description'][i]}))
         Road_Characteristic.append(chain.invoke({"question" : "Read the accident report carefully and provide only the answer of the question asked. Do not add any extra sentences or words except the answer: What is the type of road where accident took place?. If you cannot find or deduce the answer, simply reply Not Available" + df2['Description'][i]}))
+        time.sleep(30)
         Pedestrian_Involved.append(chain.invoke({"question" : "Read the accident report carefully and provide only the answer of the question asked. Do not add any extra sentences or words except the answer: Was there any pedestrian involved in the accident?. If you cannot find or deduce the answer, simply reply Not Available" + df2['Description'][i]}))
         vehicles.append(chain.invoke({"question" : "Only name the type of vehicles involved in the accident. If multiple vehicles are involved, seperate them by hyphens(-). Example answers: Bus, Truck-Bus etc. If no vehicles are mentioned, your answer will be: Not Available. Your answer should only contain the vehicle name, do not include any extra sentences" + df2['Description'][i]}))
+        time.sleep(30)
         
     #### Probable type of final dataframe:
     df2["Date"]=Date

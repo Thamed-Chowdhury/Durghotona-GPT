@@ -8,7 +8,7 @@ from streamlit_lottie import st_lottie
 image = Image.open("buet.png")
 new_image = image.resize((100, 100))
 #st.image(new_image)
-st.title("Durghotona GPT: A Web Scraping and Large Language Model Based Framework to Generate Accident Dataset Automatically in Bangladesh")
+st.title("Automated LLM and Web Scrapping based Road Accident Dataset creation from Newspapers")
 
 
 ######### Animation ##########

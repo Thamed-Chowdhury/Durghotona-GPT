@@ -1,5 +1,6 @@
 def create_data(description):
     print("Running THis Script")
+    print("Length of description is: ", len(description))
     from langchain_core.prompts import ChatPromptTemplate  ### To create a chatbot, chatprompttemplate used
     from langchain_openai import ChatOpenAI ##### For using chat openai features
     from langchain_core.output_parsers import StrOutputParser  ### Default output parser. Custom parser can also be created
@@ -14,7 +15,7 @@ def create_data(description):
     load_dotenv()
 
     ### Set all api keys:
-    os.environ["OPENAI_API_KEY"]="ENTER YOUR API KEY HERE"
+    os.environ["OPENAI_API_KEY"]="ENTER YOUR OPENAI API KEY HERE"
     ### Create Prompt Template:
     prompt=ChatPromptTemplate.from_messages(
         {
@@ -36,9 +37,8 @@ def create_data(description):
     df = description
     df = df.fillna(0)
     dj=[]
-
     for i in range(len(df)):
-        dj.append(chain.invoke({"question" : df['Date + Desc'][i]+" Is the news referring to one or many specific accident incidents or accident in general? Make sure that your answer is only in one word. If a report contains more than one accident incident, classify it as a general accident incident. The word should be either 'Specific' or 'General'. Your answer should not contain any words except 'Specific' and 'General'  "}))
+        dj.append(chain.invoke({"question" : df['Description'][i]+" Is the news about road accident? If no, then reply 'General'. Else if the news is about road accident then check if the news is referring to a specific accident incident or accident in general? Answer only in a word: Either specific or general."}))
         
     df2=df.copy()
     df2['Report Type']=dj
@@ -56,7 +56,7 @@ def create_data(description):
     ### Now finding column values using llm:
     ### A function to invoke the llm. For some reason phi3 doesn't give accurate result sometimes if used directly in dj.append()
     def res(i):
-        response=chain.invoke({"question" : df2['Description'][i]+f"""Provide only the answers of the following question seperated by a comma only:
+        response=chain.invoke({"question" : df2['Description'][i]+f"""Provide only the answers of the following question seperated by a comma only and your answers MUST BE IN ENGLISH:
                             If the news was published on {df2['Publish Date'][i]}, what is the date of accident occurrence? The date must be in Day-Month-Year format. Be careful because publish date and accident occurrence date may or may not be the same. Try to deduce correct accident date and do not include Saturday Sunday etc in your date. Only numerics are needed,
                             Time of Accident occured, How many people were killed in the accident in numeric number?, 
                             How many people were injured in the accident in numeric number?, 

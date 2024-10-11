@@ -12,7 +12,7 @@ def create_data(description):
     load_dotenv()
 
     ### Set all api keys:
-    os.environ["OPENAI_API_KEY"]="ENTER YOUR OPENAI API KEY HERE"
+    os.environ["OPENAI_API_KEY"]="ENTER YOUR API HERE"
 
 
     ### Create Prompt Template:
@@ -38,7 +38,7 @@ def create_data(description):
         dj.append(chain.invoke({"question" : df2['Description'][i]+" Is the news about road accident? If no, then reply 'General'. Else if the news is about road accident then check if the news is referring to a specific accident incident or accident in general? Answer only in a word: Either specific or general."}))
 
     df2['Report Type']=dj
-
+    df2.to_csv('Evaluation/Report Categoriztion.csv',index=False)
     def drp(p):
         df2.drop([p],inplace=True)
     ### Removing the general accident types:
@@ -83,5 +83,6 @@ def create_data(description):
     df2["Road_Characteristic"]=Road_Characteristic
     df2["Pedestrian_Involved"]=Pedestrian_Involved
     df2["Vehicles Involved"]=vehicles
-    df3=df2.drop(columns=['Description','Report Type','Date + Desc'])
+    df3=df2.drop(columns=['Description','Report Type'])
+    df3.to_csv('Evaluation/Info Extract.csv',index=False)
     return df3

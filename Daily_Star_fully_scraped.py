@@ -1,4 +1,4 @@
-def get_data(number):
+def get_data(number):    
     print("Running Daily_Star_Fully_Scraped")
     ##Necessary imports
     from selenium import webdriver
@@ -11,7 +11,7 @@ def get_data(number):
     options.add_argument("--disable-extensions")
     options.add_argument("--dns-prefetch-disable")
     options.add_argument("--disable-gpu")
-    #options.add_argument("--headless=new")
+    # options.add_argument("--headless=new")
     driver = webdriver.Chrome(options=options)
     # Set a timeout for the page to load (in seconds)
     driver.set_page_load_timeout(10)  # Limit page loading time to 10 seconds
@@ -41,52 +41,26 @@ def get_data(number):
             txt=driver.find_element('xpath',f'/html/body/div[3]/div/div/div/div[2]/main/div/div[2]/div/div[3]/div/div/div[1]/div/div[1]/div[{i+1}]/div[2]/h3/a')
             news_list.append(txt.text)
             news_link.append(txt.get_attribute("href")) 
-    ###### Scraping Publish Date ######
+    # Goose3 extraction
+    for i in range(len(news_link)):
+        from deep_translator import GoogleTranslator
+        from goose3 import Goose
+        from datetime import datetime
+        g = Goose()
+        description=[]
+        News_title=[]
+        publish_date=[]
+        for i in range(len(news_link)):
+            article = g.extract(url=news_link[i])
+            News_title.append(article.title)
+            description.append(article.cleaned_text)
+            publish_date.append(article.publish_date)
+    # Convert the dates to "day-month-year" format
+    formatted_dates = [datetime.fromisoformat(date).strftime('%d-%m-%Y') for date in publish_date]
 
-    publish_date=[]
-    for i in range (len(news_link)):
-        try:
-            driver.get(news_link[i])
-        except:
-            time.sleep(30)
-            driver.get(news_link[i])
-        time.sleep(3)
-        driver.execute_script("window.stop();")
-        try:
-            publish_date.append(driver.find_element('xpath','/html/body/div[3]/div[2]/div/div/div[2]/main/div/div[2]/div[1]/div[2]/div/div[1]/div[1]/div/div/div[1]/div[2]/div[2]').text)
-        except:
-            publish_date.append("Not available")
     #### Converting the list to a pandas dataframe by converting the list to a dictionary  ###
-    dict={'News Title':news_list,'News Link':news_link,'Publish Date':publish_date}
+    dict={'News Title':News_title,'News Link':news_link,'Publish Date':formatted_dates, 'Description':description}
     import pandas as pd
     df=pd.DataFrame(dict)
-    if(number <=8 ):
-        df = df.head(number)
-
-    ############################################### Description Exctraction #################################################
-    print('Description Extraction Started')
-    from newspaper import Article
-
-
-    text=[]
-    for i in range(len(df)):
-        url = df['News Link'][i]
-        article = Article(url)
-        article.download()
-        article.parse()
-        
-        text.append(article.text)
-
-    df2=df.assign(Description=text)
-
-
-    for p in range(len(df2)):
-        if df2['Publish Date'][p]=="Not available":
-            df2.drop([p],inplace=True)
-    #df2.reset_index()
-
-    df2.reset_index(drop=True,inplace=True)
-
-    df2["Date + Desc"]=df2['Publish Date'] + ".     News Description:"+ df2['Description']
-    return df2
-   
+    return df
+            

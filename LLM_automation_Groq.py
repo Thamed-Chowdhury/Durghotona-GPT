@@ -14,8 +14,10 @@ def create_data(description):
 
     ### Set all api keys:
 
-    #os.environ["LANGCHAIN_TRACING_V2"]="true" ### Will automatically trace our codes using Langsmith
-    os.environ["GROQ_API_KEY"]="ENTER YOUR GROQ API KEY HERE"  #### Will be used for monitoring the calls to and from llm (both free and paid)
+
+    os.environ["GROQ_API_KEY"]="ENTER YOUR API HERE"
+
+
 
     ### Create Prompt Template:
     prompt=ChatPromptTemplate.from_messages(
@@ -46,9 +48,10 @@ def create_data(description):
         
     df2=df.copy()
     df2['Report Type']=dj
+    df2.to_csv('Report Categoriztion.csv',index=False)
     def drp(p):
         df2.drop([p],inplace=True)
-
+    
     ### Removing the general accident types:
     for p in range(len(df)):
         if "General" in df2['Report Type'][p]:
@@ -60,16 +63,17 @@ def create_data(description):
     ### Now finding column values using llm:
     ### A function to invoke the llm. For some reason phi3 doesn't give accurate result sometimes if used directly in dj.append()
     def res(i):
-        response=chain.invoke({"question" : df2['Description'][i]+f"""Provide only the answers of the following question seperated by a comma only and your answers MUST BE IN ENGLISH:
-                            If the news was published on {df2['Publish Date'][i]}, what is the date of accident occurrence? The date must be in Day-Month-Year format. Be careful because publish date and accident occurrence date may or may not be the same. Try to deduce correct accident date,
-                            Time of Accident occured, How many people were killed in the accident in numeric number?, 
-                            How many people were injured in the accident in numeric number?, 
-                            Location of the accident, 
-                            Type of road where accident occured, 
-                            Was there any pedestrian involved?,  
-                            Do not include any other sentences except the answers seperated by comma only and do not include sentences such as: Here are the answers, 
-                            if you cannot find or deduce a answer simply put 'Not Available' in place of it. 
-                            If a report mentions more than one specific accident incidents only consider the 1st accident incident and ignore the second one""" })
+        response=chain.invoke({"question" : f"""I will give you two strings. 1st string will contain a publish date of a news and the 2nd string will contain the accident news itself. 
+                            If the 2nd string contains more than one accident incidents, only consider the 1st incident. Based on these two strings, you have to answer the following questions. Remember your answer must contain ONLY THE ANSWERS WITHOUT ANY EXTRA WORDS OR SENTENCES:
+                            what is the date (Day-Month-Year numerical format) of accident occurrence? ;
+                            Time of Accident occured; How many people were killed in the accident?; 
+                            How many people were injured in the accident?;
+                            Location of the accident; 
+                            Type of road where accident occured; 
+                            Was there any pedestrian involved?;  
+                            Do not include any extra words or sentences except the answers seperated by semicolons only. Your reply cannot contain sentences such as - 'Here are the answers to the questions'
+                            string 1 = {df2['Publish Date'][i]}
+                            string 2 = {df2['Description'][i]}""" })
         return response
     #### dj2 list contains all column values seperated by comma:
     dj2=[]
@@ -79,7 +83,7 @@ def create_data(description):
 
 ### A function to invoke the llm. For some reason phi3 doesn't give accurate result sometimes if used directly in dj.append()
     def res2(i):
-        response=chain.invoke({"question" : df2['Date + Desc'][i]+" Only name the type of vehicles involved in the accident. If multiple vehicles are involved, seperate them by hyphens(-). Example answers: Bus, Truck-Bus etc. If no vehicles are mentioned, your answer will be: Not Available. Your answer should only contain the vehicle name, do not include any extra sentences"})
+        response=chain.invoke({"question" : df2['Description'][i]+" Only name the type of vehicles involved in the accident. If multiple vehicles are involved, seperate them by hyphens(-). Example answers: Bus, Truck-Bus etc. If no vehicles are mentioned, your answer will be: Not Available. Your answer should only contain the vehicle name, do not include any extra sentences"})
         return response
     #### dj2 list contains all column values seperated by comma:
     vehicles=[]
@@ -99,7 +103,7 @@ def create_data(description):
     #Vehicles_involved=[]
 
     for i in range(len(dj2)):
-        words = dj2[i].split(",")  # Splitting at the comma delimiter
+        words = dj2[i].split(";")  # Splitting at the semicolon delimiter
         #print(f"Date: {words[0]}")
         Date.append(words[0])
             
@@ -123,7 +127,8 @@ def create_data(description):
     df2["Road_Characteristic"]=Road_Characteristic
     df2["Pedestrian_Involved"]=Pedestrian_Involved
     df2["Vehicles_involved"]=vehicles
-    df3=df2.drop(columns=['Description','Date + Desc','Report Type'])
+    df3=df2.drop(columns=['Description','Report Type'])
+    df3.to_csv('Info Extract.csv',index = False)
     return df3
     
 

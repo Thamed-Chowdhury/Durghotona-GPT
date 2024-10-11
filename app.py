@@ -81,5 +81,7 @@ image7 = Image.open("llama3.jpeg")
 new_image7 = image7.resize((p, p))
 image8 = Image.open("langchain.png")
 new_image8 = image8.resize((p, p))
+image9 = Image.open("deep_translator.png")
+new_image9 = image9.resize((p, p))
 
-st.image([new_image2, new_image3,new_image4,new_image5,new_image6,new_image7,new_image8])
+st.image([new_image2, new_image3,new_image4,new_image5,new_image6,new_image7,new_image8,new_image9])

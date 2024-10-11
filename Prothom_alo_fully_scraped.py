@@ -10,7 +10,7 @@ def get_data(number):
     #PROXY = "45.251.231.113:5678"
     options = ChromeOptions()
     #options.add_argument('--proxy-server=%s' % PROXY)
-    options.add_argument("--headless=new")
+    #options.add_argument("--headless=new")
     driver = webdriver.Chrome(options=options)
     ## Finding Elements by XPATH
     from selenium.webdriver.common.by import By
@@ -46,53 +46,34 @@ def get_data(number):
             publish_date.append(date[i].text)
 
     ###### Scraping Description modified for translation######
-    text=[]
-    for i in range (len(news_link)):
-        driver.get(news_link[i])
-        try:
-            tmp=""
-            elements = driver.find_elements(By.TAG_NAME, 'p')
-            for i in range(len(elements)):
-                if i>2 and len(tmp+elements[i].text) < 2000:
-                    tmp=tmp+elements[i].text
-                    
-            text.append(tmp)
-        except:
-            text.append("Not Available")
-        time.sleep(5)
-    ## Translation 
-    for i in range(len(news_list)):
-        news_list[i] = GoogleTranslator(source='auto', target='en').translate(text=news_list[i])
-        text[i] = GoogleTranslator(source='auto', target='en').translate(text=text[i])
-        publish_date[i] = GoogleTranslator(source='auto', target='en').translate(text=publish_date[i])
+    from deep_translator import GoogleTranslator
+    from goose3 import Goose
+    from datetime import datetime
+    g = Goose()
+    description=[]
+    News_title=[]
+    publish_date=[]
+    for i in range(len(news_link)):
+        print(i)
+        article = g.extract(url=news_link[i])
+        ### Only for Prothom Alo ###
+        # Access the articleBody field
+        data = article.schema
+        article_body = data.get('articleBody')
+        print("Para length", len(article_body))
+        if(len(article_body)>=2200):
+            article_body=article_body[0:2200]
+        bangla_title=article.title
+        english_title = GoogleTranslator(source='auto', target='en').translate(text=bangla_title)
+        News_title.append(english_title)
+        text = GoogleTranslator(source='auto', target='en').translate(text=article_body)
+        description.append(text)
+        publish_date.append(article.publish_date)
+    # Convert the dates to "day-month-year" format
+    formatted_dates = [datetime.fromisoformat(date).strftime('%d-%m-%Y') for date in publish_date]
 
     #### Converting the list to a pandas dataframe by converting the list to a dictionary  ###
-    dict={'News Title':news_list,'News Link':news_link,'Publish Date':publish_date, 'Description':text}
+    dict={'News Title':News_title,'News Link':news_link,'Publish Date':formatted_dates, 'Description':description}
     import pandas as pd
     df=pd.DataFrame(dict)
-    df2=df.copy()
-
-
-    for p in range(len(df2)):
-        if df2['Publish Date'][p]=="Not available":
-            df2.drop([p],inplace=True)
-    #df2.reset_index()
-    df2["Date + Desc"]=df2["Publish Date"] + df2["Description"]
-    df2.reset_index(drop=True,inplace=True)
-    # Function to convert relative time to date and format as day-month-year
-    def convert_relative_time_to_date(time_str):
-        if 'hours ago' in time_str:
-            hours = int(re.search(r'(\d+)', time_str).group(1))
-            return (datetime.now() - timedelta(hours=hours)).strftime('%d-%m-%Y')
-        elif 'days ago' in time_str:
-            days = int(re.search(r'(\d+)', time_str).group(1))
-            return (datetime.now() - timedelta(days=days)).strftime('%d-%m-%Y')
-        else:
-            # If it's already a date string, return it in day-month-year format
-            return pd.to_datetime(time_str).strftime('%d-%m-%Y')
-
-    # Apply the function to the DataFrame
-    df2['Publish Date'] = df2['Publish Date'].apply(convert_relative_time_to_date)
-
-    return df2
-    #df3.to_csv('Prothom_Alo_Description.txt',  index=False)
+    return df
